@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)file:///C:/Users/themo/AppData/Local/Microsoft/Windows/INetCache/IE/GV76H8SS/index[1].html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Break aceuil</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E63946; /* Rouge plus vif */
+            --primary-dim: rgba(230, 57, 70, 0.2);
+            --bg-black: #050505; /* Noir plus profond */
+            --bg-card: #121212;
+            --text-main: #ffffff;
+            --text-dim: #999999;
+            --border: #222222;
+            --glow: rgba(230, 57, 70, 0.7);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { 
+            font-family: 'DM Sans', sans-serif; 
+            color: var(--text-main); 
+            background-color: var(--bg-black);
+            line-height: 1.6; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Style pour masquer l'Iframe de musique tout en garantissant sa lecture */
+        .bg-music-stream {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Canvas pour les particules en arrière-plan */
+        #bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none; /* Laisse cliquer à travers */
+        }
+
+        /* Forcer le contenu à être au-dessus du canvas */
+        header, section, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Barre de navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+        .logo { 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px; 
+            font-weight: 700; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Hero Section stylisée */
+        .hero {
+            height: 90vh;
+            background: radial-gradient(circle at center, rgba(230, 57, 70, 0.1) 0%, transparent 70%),
+                        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), 
+                        url('https://assets-v2.codedesign.ai/storage/v1/object/public/6a038727d602aa2abd3dfd1b_44c3f7f7/asset-d5c665bd');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-content h1 { 
+            font-size: clamp(3rem, 8vw, 5.5rem); 
+            font-weight: 700;
+            line-height: 0.9;
+            margin-bottom: 40px;
+            background: linear-gradient(to bottom, #fff 40%, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Boutons de style Pro (Forme angulaire + Typo Orbitron + Lueur) */
+        .btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px; 
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px var(--glow);
+            background-color: #ff4d5a;
+        }
+        .btn-outline { 
+            font-family: 'Orbitron', sans-serif;
+            background: transparent; 
+            border: 2px solid var(--border); 
+            padding: 10px 25px; 
+            font-size: 0.85rem;
+            color: var(--text-main);
+            box-shadow: none;
+            letter-spacing: 1px;
+        }
+        .btn-outline:hover { 
+            border-color: var(--primary); 
+            color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-dim);
+        }
+
+        /* Bannière Fun */
+        .fun-banner {
+            padding: 50px 10%;
+            background: linear-gradient(90deg, transparent, rgba(17, 17, 17, 0.6), transparent);
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .fun-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+        .fun-highlight { color: var(--primary); font-weight: 700; }
+
+        /* Section Jeux */
+        .section { padding: 100px 8%; text-align: center; }
+        .section-title { 
+            font-size: 2.5rem; 
+            margin-bottom: 60px; 
+            letter-spacing: 2px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            margin: 15px auto;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Cartes de jeux fixes */
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            user-select: none;
+        }
+        .card img { 
+            width: 100%; 
+            height: 240px; 
+            object-fit: cover; 
+        }
+        .card h3 { padding: 25px; font-size: 1.2rem; font-weight: 700; }
+
+        /* Footer profil */
+        footer {
+            background: #000;
+            padding: 100px 10% 60px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        .profile-container { position: relative; display: inline-block; margin-bottom: 25px; }
+        .profile-img { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            padding: 0;
+            object-fit: cover;
+        }
+        .footer-name { 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem; 
+            margin-bottom: 5px; 
+            letter-spacing: 1px;
+        }
+        
+        /* Alignement boutons de contact */
+        .footer-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        .footer-actions .btn {
+            width: 100%;
+        }
+
+        /* RETOUR À L'ANCIEN STYLE POUR LES BOUTONS LIENS (Instagram / PayPal) */
+        .btn-link-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 45px;
+            border-radius: 50px; /* Retour aux coins arrondis style pilule */
+            background: #ffffff;
+            box-shadow: 0 10px 20px rgba(255,255,255,0.05);
+            border: none;
+            transition: all 0.4s ease;
+        }
+        .btn-link-img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255,255,255,0.1);
+            background: #ffffff;
+        }
+        .btn-link-img img {
+            max-height: 45px; /* Taille d'origine */
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
+        .btn-link-img:hover img {
+            filter: grayscale(0%);
+        }
+        
+        /* --- RESPONSIVE TELEPHONE --- */
+        @media (max-width: 768px) {
+            header { padding: 15px 5%; }
+            
+            /* On force l'affichage de Info et Contact sur mobile */
+            .nav-links .btn-outline { 
+                display: inline-block; 
+                padding: 8px 15px; 
+                font-size: 0.75rem;
+            }
+            
+            /* On masque le bouton Jouer de la navbar uniquement sur mobile */
+            .nav-links .btn-play-nav { 
+                display: none; 
+            }
+            
+            .nav-links {
+                gap: 8px; /* On resserre un peu l'espace sur petit écran */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <iframe class="bg-music-stream" width="1px" height="1px" src="./Casino Break aceuil_files/AqY4RtNeJOI.html" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
+    </iframe>
+
+    <canvas id="bg-particles" width="2752" height="1023"></canvas>
+
+    <header>
+        <a href="file:///C:/Users/themo/AppData/Local/Microsoft/Windows/INetCache/IE/GV76H8SS/index[1].html#" class="logo">CASINO BREAK</a>
+        <div class="nav-links">
+            <!-- Modification du lien Info pour aller vers la nouvelle URL -->
+            <a href="https://unebifflepas2.github.io/info/" class="btn btn-outline">Info</a>
+            <a href="file:///C:/Users/themo/AppData/Local/Microsoft/Windows/INetCache/IE/GV76H8SS/index[1].html#contact" class="btn btn-outline">Contact</a>
+            <!-- Modification du bouton Jouer de la navbar -->
+            <a href="https://unebifflepas2.github.io/Break-Casino/" class="btn btn-play-nav" style="padding: 12px 30px; font-size: 0.9rem;">Jouer</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>JOUEZ, GAGNEZ,<br>AMUSEZ-VOUS</h1>
+            <!-- Modification du gros bouton central Lancer le Jeux -->
+            <a href="https://unebifflepas2.github.io/Break-Casino/" class="btn">Lancer le Jeux</a>
+        </div>
+    </section>
+
+    <section class="fun-banner">
+        <p class="fun-text">TESTER NOS <span class="fun-highlight">MINI JEUX FUN</span></p>
+    </section>
+
+    <main>
+        <section class="section">
+            <h2 class="section-title">Jeux Populaires</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 480%22%3E%3Cdefs%3E%3CradialGradient id=%22g%22 cx=%2250%25%22 cy=%2240%25%22 r=%2280%25%22%3E%3Cstop offset=%220%22 stop-color=%22%235a0a14%22/%3E%3Cstop offset=%221%22 stop-color=%22%23120204%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=%22800%22 height=%22480%22 fill=%22url%28%23g%29%22/%3E%3Cg transform=%22translate%28400 250%29 scale%28.78%29 translate%28-400 -240%29%22%3E%3Crect x=%22110%22 y=%2290%22 width=%22580%22 height=%22300%22 rx=%2230%22 fill=%22%231a0a0a%22 stroke=%22%23f5c542%22 stroke-width=%2210%22/%3E%3Crect x=%22150%22 y=%22130%22 width=%22150%22 height=%22220%22 rx=%2216%22 fill=%22%23fff8e1%22 stroke=%22%23f5c542%22 stroke-width=%228%22/%3E%3Ctext x=%22225%22 y=%22290%22 font-family=%22Arial Black,Impact,sans-serif%22 font-size=%22150%22 font-weight=%22900%22 text-anchor=%22middle%22 fill=%22%23E63946%22%3E7%3C/text%3E%3Crect x=%22320%22 y=%22130%22 width=%22150%22 height=%22220%22 rx=%2216%22 fill=%22%23fff8e1%22 stroke=%22%23f5c542%22 stroke-width=%228%22/%3E%3Ctext x=%22395%22 y=%22290%22 font-family=%22Arial Black,Impact,sans-serif%22 font-size=%22150%22 font-weight=%22900%22 text-anchor=%22middle%22 fill=%22%23E63946%22%3E7%3C/text%3E%3Crect x=%22490%22 y=%22130%22 width=%22150%22 height=%22220%22 rx=%2216%22 fill=%22%23fff8e1%22 stroke=%22%23f5c542%22 stroke-width=%228%22/%3E%3Ctext x=%22565%22 y=%22290%22 font-family=%22Arial Black,Impact,sans-serif%22 font-size=%22150%22 font-weight=%22900%22 text-anchor=%22middle%22 fill=%22%23E63946%22%3E7%3C/text%3E%3Ctext x=%22400%22 y=%2262%22 font-family=%22Arial Black,sans-serif%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22%23f5c542%22%3EJACKPOT%3C/text%3E%3Crect x=%22705%22 y=%22150%22 width=%2214%22 height=%22140%22 rx=%227%22 fill=%22%23999%22/%3E%3Ccircle cx=%22712%22 cy=%22140%22 r=%2226%22 fill=%22%23E63946%22 stroke=%22%23fff%22 stroke-width=%224%22/%3E%3C/g%3E%3C/svg%3E" alt="Slots">
+                    <h3>Slots</h3>
+                </div>
+                <div class="card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 480%22%3E%3Cdefs%3E%3CradialGradient id=%22g%22 cx=%2250%25%22 cy=%2240%25%22 r=%2280%25%22%3E%3Cstop offset=%220%22 stop-color=%22%230c3b2a%22/%3E%3Cstop offset=%221%22 stop-color=%22%23041510%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=%22800%22 height=%22480%22 fill=%22url%28%23g%29%22/%3E%3Cpath d=%22M400,250 L400.0,60.0 A190,190 0 0 1 495.0,85.5 Z%22 fill=%22%23E63946%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L495.0,85.5 A190,190 0 0 1 564.5,155.0 Z%22 fill=%22%23111%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L564.5,155.0 A190,190 0 0 1 590.0,250.0 Z%22 fill=%22%23E63946%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L590.0,250.0 A190,190 0 0 1 564.5,345.0 Z%22 fill=%22%23111%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L564.5,345.0 A190,190 0 0 1 495.0,414.5 Z%22 fill=%22%23E63946%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L495.0,414.5 A190,190 0 0 1 400.0,440.0 Z%22 fill=%22%23111%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L400.0,440.0 A190,190 0 0 1 305.0,414.5 Z%22 fill=%22%23E63946%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L305.0,414.5 A190,190 0 0 1 235.5,345.0 Z%22 fill=%22%23111%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L235.5,345.0 A190,190 0 0 1 210.0,250.0 Z%22 fill=%22%23E63946%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L210.0,250.0 A190,190 0 0 1 235.5,155.0 Z%22 fill=%22%23111%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L235.5,155.0 A190,190 0 0 1 305.0,85.5 Z%22 fill=%22%23E63946%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Cpath d=%22M400,250 L305.0,85.5 A190,190 0 0 1 400.0,60.0 Z%22 fill=%22%23111%22 stroke=%22%23f5c542%22 stroke-width=%223%22/%3E%3Ccircle cx=%22400%22 cy=%22250%22 r=%2270%22 fill=%22%231a1a1a%22 stroke=%22%23f5c542%22 stroke-width=%228%22/%3E%3Ccircle cx=%22400%22 cy=%22250%22 r=%2226%22 fill=%22%23f5c542%22/%3E%3Ccircle cx=%22520%22 cy=%22140%22 r=%2214%22 fill=%22%23fff%22 stroke=%22%23999%22 stroke-width=%223%22/%3E%3Ccircle cx=%22400%22 cy=%22250%22 r=%22190%22 fill=%22none%22 stroke=%22%23f5c542%22 stroke-width=%2212%22/%3E%3C/svg%3E" alt="Roulette">
+                    <h3>Roulette</h3>
+                </div>
+                <div class="card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 480%22%3E%3Cdefs%3E%3CradialGradient id=%22g%22 cx=%2250%25%22 cy=%2240%25%22 r=%2280%25%22%3E%3Cstop offset=%220%22 stop-color=%22%233a0a14%22/%3E%3Cstop offset=%221%22 stop-color=%22%230d0204%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=%22800%22 height=%22480%22 fill=%22url%28%23g%29%22/%3E%3Cg transform=%22translate%28280,250%29 rotate%28-14%29%22%3E%3Crect x=%22-80%22 y=%22-80%22 width=%22160%22 height=%22160%22 rx=%2226%22 fill=%22%23fff%22 stroke=%22%23E63946%22 stroke-width=%228%22/%3E%3Ccircle cx=%22-40%22 cy=%22-40%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%2240%22 cy=%22-40%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%220%22 cy=%220%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%22-40%22 cy=%2240%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%2240%22 cy=%2240%22 r=%2212%22 fill=%22%23111%22/%3E%3C/g%3E%3Cg transform=%22translate%28520,230%29 rotate%2816%29%22%3E%3Crect x=%22-80%22 y=%22-80%22 width=%22160%22 height=%22160%22 rx=%2226%22 fill=%22%23fff%22 stroke=%22%23E63946%22 stroke-width=%228%22/%3E%3Ccircle cx=%22-40%22 cy=%22-45%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%2240%22 cy=%22-45%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%22-40%22 cy=%220%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%2240%22 cy=%220%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%22-40%22 cy=%2245%22 r=%2212%22 fill=%22%23111%22/%3E%3Ccircle cx=%2240%22 cy=%2245%22 r=%2212%22 fill=%22%23111%22/%3E%3C/g%3E%3Cellipse cx=%22400%22 cy=%22420%22 rx=%22260%22 ry=%2222%22 fill=%22%23000%22 opacity=%22.35%22/%3E%3C/svg%3E" alt="Dés">
+                    <h3>Dés</h3>
+                </div>
+                <div class="card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 480%22%3E%3Cdefs%3E%3CradialGradient id=%22g%22 cx=%2250%25%22 cy=%2240%25%22 r=%2280%25%22%3E%3Cstop offset=%220%22 stop-color=%22%231b1245%22/%3E%3Cstop offset=%221%22 stop-color=%22%2307040f%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=%22800%22 height=%22480%22 fill=%22url%28%23g%29%22/%3E%3Cg transform=%22translate%28270,250%29 rotate%28-16%29%22%3E%3Crect x=%22-80%22 y=%22-115%22 width=%22160%22 height=%22230%22 rx=%2216%22 fill=%22%23fff%22/%3E%3Ctext x=%22-60%22 y=%22-70%22 font-family=%22Arial,sans-serif%22 font-size=%2244%22 fill=%22%23111%22%3EA%3C/text%3E%3Ctext x=%220%22 y=%2240%22 font-family=%22Arial,sans-serif%22 font-size=%22110%22 text-anchor=%22middle%22 fill=%22%23111%22%3E%E2%99%A0%3C/text%3E%3C/g%3E%3Cg transform=%22translate%28410,240%29 rotate%2810%29%22%3E%3Crect x=%22-80%22 y=%22-115%22 width=%22160%22 height=%22230%22 rx=%2216%22 fill=%22%23fff%22/%3E%3Ctext x=%22-60%22 y=%22-70%22 font-family=%22Arial,sans-serif%22 font-size=%2244%22 fill=%22%23E63946%22%3EK%3C/text%3E%3Ctext x=%220%22 y=%2240%22 font-family=%22Arial,sans-serif%22 font-size=%22110%22 text-anchor=%22middle%22 fill=%22%23E63946%22%3E%E2%99%A5%3C/text%3E%3C/g%3E%3Ccircle cx=%22560%22 cy=%22330%22 r=%2270%22 fill=%22%23E63946%22 stroke=%22%23fff%22 stroke-width=%228%22 stroke-dasharray=%2226 16%22/%3E%3Ccircle cx=%22560%22 cy=%22330%22 r=%2242%22 fill=%22%23f5c542%22 stroke=%22%23fff%22 stroke-width=%224%22/%3E%3Ctext x=%22560%22 y=%22346%22 font-family=%22Arial Black,sans-serif%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22%237a0f1a%22%3E%24%3C/text%3E%3C/svg%3E" alt="Mini Jeux">
+                    <h3>Mini Jeux</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="profile-container">
+            <img src="https://www.gifcen.com/wp-content/uploads/2025/11/vegeta-gif.gif" alt="Bisk Profile" class="profile-img" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E63946%22/%3E%3Cstop offset=%221%22 stop-color=%22%235a0a14%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx=%2260%22 cy=%2260%22 r=%2260%22 fill=%22url%28%23a%29%22/%3E%3Ctext x=%2260%22 y=%2280%22 font-family=%22Arial Black,Impact,sans-serif%22 font-size=%2264%22 text-anchor=%22middle%22 fill=%22%23fff%22%3EB%3C/text%3E%3C/svg%3E'">
+        </div>
+        <h3 class="footer-name">Bisk</h3>
+        <p style="color: var(--text-dim); margin-bottom: 30px; letter-spacing: 1px;">DEVELOPER</p>
+        
+        <div class="footer-actions">
+            <a href="https://www.instagram.com/m_kx13/" target="_blank" class="btn btn-link-img" style="gap:12px;color:#111;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="#E1306C"/></svg><span>Instagram</span></a>
+            <a href="https://www.paypal.me/Bisk1M" target="_blank" class="btn btn-link-img" style="gap:12px;color:#111;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase"><span aria-hidden="true" style="font-size:1.4rem">💙</span><span>Soutenir</span></a>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('bg-particles');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 45;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(230, 57, 70, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+    </script>
+
+
+
+</body></html>
